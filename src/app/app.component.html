@@ -13,6 +13,9 @@
       <div class="info">
         {{ weatherData.hourly.windspeed_10m[currentHourIndex] }}
       </div>
+      <div class="info">
+        Current time: {{ datePipe.transform(currentTime, 'shortTime') }}
+      </div>
     </div>
   </div>
   

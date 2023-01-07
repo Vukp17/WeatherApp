@@ -3,10 +3,14 @@ import { WeatherService } from './services/weather.service';
 import { HttpResponse } from '@angular/common/http';
 import { WeatherData } from './models/weather.model';
 import { GeocodeData } from './models/geocode.model';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [
+    DatePipe
+  ]
 })
 export class AppComponent implements OnInit {
   title = 'weather-app';
@@ -17,7 +21,9 @@ export class AppComponent implements OnInit {
   cityPhotoUrl: string
   currentHourIndex: number;
   currentHour: number;
-  constructor(private weatherService: WeatherService) { }
+  currentTime = new Date();
+ 
+  constructor(private weatherService: WeatherService, public datePipe: DatePipe) { }
   ngOnInit(): void {
     this.getWeather()
     this.getCityPicture()
