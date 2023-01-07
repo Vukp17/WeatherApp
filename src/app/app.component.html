@@ -2,10 +2,10 @@
   <input type="text" [(ngModel)]="city" />
   <button (click)="getWeather(); getCityPicture(); getLatLng()">Search</button>
 </div>
-<ng-container *ngIf="weatherData && weatherData.hourly">
+<ng-container *ngIf="weatherData && weatherData.hourly && city">
   <div class="image-container">
     <img *ngIf="cityPhotoUrl" [src]="cityPhotoUrl" />
-    <div class="temperature-info">
+    <div *ngIf="cityPhotoUrl" class="temperature-info">
       <div class="city-name">{{ city }}</div>
       <div class="info">
         {{ weatherData.hourly.temperature_2m[currentHourIndex] }}°C
