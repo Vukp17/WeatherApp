@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   currentHourIndex: number;
   currentHour: number;
   currentTime = new Date();
- 
+
   constructor(private weatherService: WeatherService, public datePipe: DatePipe) { }
   ngOnInit(): void {
     this.getWeather()
@@ -40,14 +40,25 @@ export class AppComponent implements OnInit {
   }
 
   getLatLng() {
-    this.weatherService.getLatLng(this.city).subscribe((response: GeocodeData) => {
-      this.latitude = response.results[0].geometry.location.lat;
-      this.longitude = response.results[0].geometry.location.lng;
-    });
+    if (this.city != '') {
+      this.weatherService.getLatLng(this.city).subscribe((response: GeocodeData) => {
+        this.latitude = response.results[0].geometry.location.lat;
+        this.longitude = response.results[0].geometry.location.lng;
+      });
+    }
+
   }
   getCityPicture() {
-    this.weatherService.getCityPhoto(this.city).subscribe(photoUrl => {
-      this.cityPhotoUrl = photoUrl;
-    });
+    if (this.city != '') {
+      this.weatherService.getCityPhoto(this.city).subscribe(photoUrl => {
+        this.cityPhotoUrl = photoUrl;
+      });
+    }
+  }
+  search() {
+    if (this.city.trim().length === 0) {
+      // input is empty, do nothing
+      return;
+    }
   }
 }

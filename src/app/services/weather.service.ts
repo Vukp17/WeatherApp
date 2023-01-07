@@ -27,7 +27,7 @@ export class WeatherService {
   getCityPhoto(city: string):Observable<string> {
     return this.http.get(`https://api.unsplash.com/search/photos/?client_id=`+environment.apiKeyUsplash +`&query=${city}`)
       .pipe(
-        map((response: any) => response.results[0].urls.full),
+        map((response: any) => response.results[0].urls?.full),
         catchError(error => {
           console.error(error);
           return of(null);

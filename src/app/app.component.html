@@ -1,6 +1,9 @@
 <div class="container">
-  <input type="text" [(ngModel)]="city" />
-  <button (click)="getWeather(); getCityPicture(); getLatLng()">Search</button>
+  <form (ngSubmit)="search()">
+    <input type="text" [(ngModel)]="city" name="input" required/>
+    <button (click)="getWeather(); getCityPicture(); getLatLng()" type="submit">Search</button>
+  </form>
+
 </div>
 <ng-container *ngIf="weatherData && weatherData.hourly && city">
   <div class="image-container">
