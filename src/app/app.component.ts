@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   currentHour: number;
   currentTime = new Date();
   previousCity: string = "Berlin";
-
+  hasError: boolean = false;
   constructor(private weatherService: WeatherService, public datePipe: DatePipe) { }
   ngOnInit(): void {
     this.getWeather()
@@ -43,11 +43,18 @@ export class AppComponent implements OnInit {
   getLatLng() {
     if (this.city != '' &&   this.city !== this.previousCity)  {
       this.weatherService.getLatLng(this.city).subscribe((response: GeocodeData) => {
-        this.latitude = response.results[0].geometry.location.lat;
-        this.longitude = response.results[0].geometry.location.lng;
-        this.getWeather();
+        if (response.results.length > 0 && response.results[0].geometry) {
+          this.latitude = response.results[0].geometry.location.lat;
+          this.longitude = response.results[0].geometry.location.lng;
+          this.hasError=false;
+          this.getWeather();
+          this.getCityPicture()
+          this.previousCity = this.city;
+          
+        }
+        this.hasError=true;
       });
-      this.previousCity = this.city;
+      
     }
   }
   

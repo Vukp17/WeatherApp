@@ -1,8 +1,8 @@
 <div class="container">
     <input type="text" [(ngModel)]="city" />
-    <button (click)="getLatLng(); getCityPicture();"[disabled]="!city" type="submit">Search</button>
+    <button (click)="getLatLng();"[disabled]="!city" type="submit">Search</button>
 </div>
-<ng-container *ngIf="weatherData && weatherData.hourly ">
+<ng-container *ngIf="weatherData && weatherData.hourly  ">
   <div class="image-container">
     <img *ngIf="cityPhotoUrl" [src]="cityPhotoUrl" />
     <div *ngIf="cityPhotoUrl" class="temperature-info">
