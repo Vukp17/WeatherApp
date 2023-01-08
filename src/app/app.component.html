@@ -1,15 +1,12 @@
 <div class="container">
-  <form (ngSubmit)="search()">
-    <input type="text" [(ngModel)]="city" name="input" required/>
-    <button (click)="getWeather(); getCityPicture(); getLatLng()" type="submit">Search</button>
-  </form>
-
+    <input type="text" [(ngModel)]="city" />
+    <button (click)="getLatLng(); getCityPicture();"[disabled]="!city" type="submit">Search</button>
 </div>
-<ng-container *ngIf="weatherData && weatherData.hourly && city">
+<ng-container *ngIf="weatherData && weatherData.hourly ">
   <div class="image-container">
     <img *ngIf="cityPhotoUrl" [src]="cityPhotoUrl" />
     <div *ngIf="cityPhotoUrl" class="temperature-info">
-      <div class="city-name">{{ city }}</div>
+      <div class="city-name">{{ previousCity }}</div>
       <div class="info">
         {{ weatherData.hourly.temperature_2m[currentHourIndex] }}°C
       </div>
